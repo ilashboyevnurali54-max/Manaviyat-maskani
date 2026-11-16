@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma'naviyat Maskani | Direktor O'rinbosari Shaxsiy Sahifasi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#1e3a8a',
+                            900: '#0f172a',
+                            950: '#090e1a',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-900 selection:text-white">
+
+    <!-- ==================== NAVBAR (YUQORI MENYU) ==================== -->
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logotip va Sayt Nomi -->
+                <a href="#bosh-sahifa" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-900 to-indigo-800 flex items-center justify-center text-amber-400 shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-book-open-reader text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="block text-lg font-extrabold text-slate-900 tracking-tight leading-none">Ma'naviyat<span class="text-blue-800">Maskani</span></span>
+                        <span class="text-xs font-medium text-slate-500">Zamdirektor portfoliyosi</span>
+                    </div>
+                </a>
+
+                <!-- Kompyuter uchun Menyu Tugmalari -->
+                <div class="hidden md:flex items-center space-x-3 lg:space-x-5">
+                    <a href="#bosh-sahifa" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 transition-colors">
+                        Bosh sahifa
+                    </a>
+                    
+                    <a href="#faoliyat" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 transition-colors">
+                        Faoliyat yo'nalishlari
+                    </a>
+
+                    <!-- "Men haqimda" Maxsus Tugmasi -->
+                    <button onclick="toggleAboutPanel()" id="navAboutBtn" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-blue-900 bg-blue-50 border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-all flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-user-tie text-blue-800"></i>
+                        <span>Men haqimda</span>
+                    </button>
+
+                    <!-- "Kun maqolasi" Maxsus Tugmasi -->
+                    <button onclick="openArticlePanel()" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-900 to-indigo-900 hover:from-blue-800 hover:to-indigo-800 transition-all flex items-center gap-2 shadow-md hover:shadow-lg">
+                        <i class="fa-solid fa-feather-pointed text-amber-400"></i>
+                        <span>Kun maqolasi</span>
+                    </button>
+                </div>
+
+                <!-- Mobil Menyu Tugmasi -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none" aria-label="Menyuni ochish">
+                        <i class="fa-solid fa-bars text-xl" id="mobileMenuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobil Ochiluvchi Menyu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-5 space-y-2 shadow-lg">
+            <a href="#bosh-sahifa" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-100">
+                Bosh sahifa
+            </a>
+            <a href="#faoliyat" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-100">
+                Faoliyat yo'nalishlari
+            </a>
+            <button onclick="toggleMobileMenu(); toggleAboutPanel();" class="w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-blue-900 bg-blue-50 flex items-center gap-3">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Men haqimda (Ma'lumotlar)</span>
+            </button>
+            <button onclick="toggleMobileMenu(); openArticlePanel();" class="w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-white bg-blue-900 flex items-center gap-3">
+                <i class="fa-solid fa-feather-pointed text-amber-400"></i>
+                <span>Kun maqolasi (Tarbiya)</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== INTERAKTIV DIV 1: "MEN HAQIMDA" BLOKI ==================== -->
+    <!-- Navbar'dagi "Men haqimda" bosilganda ochiladigan maxsus div -->
+    <div id="aboutDivContainer" class="hidden transition-all duration-300 ease-in-out bg-slate-900/5 border-b border-blue-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white rounded-3xl shadow-xl border border-blue-100 overflow-hidden relative">
+                <!-- Yuqori bezak chizig'i -->
+                <div class="h-2.5 bg-gradient-to-r from-blue-900 via-indigo-800 to-amber-500"></div>
+                
+                <!-- Yopish tugmasi -->
+                <button onclick="closeAboutPanel()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 hover:bg-red-50 text-slate-500 hover:text-red-600 flex items-center justify-center transition-colors shadow-sm" title="Yopish">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+
+                <div class="p-6 sm:p-10">
+                    <div class="flex items-center gap-2 text-amber-600 font-bold text-xs uppercase tracking-wider mb-2">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span>Shaxsiy Ma'lumotnoma (Rezyume)</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">Direktor O'rinbosari Haqida Batafsil</h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                        <!-- Chap ustun: Rasm va asosiy ma'lumot -->
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 text-center">
+                            <img src="https://placehold.co/300x300/1e3a8a/ffffff?text=Zamdirektor" 
+                                 onerror="this.src='https://placehold.co/300x300/0f172a/fbbf24?text=Ustoz'"
+                                 alt="Direktor o'rinbosari surati" 
+                                 class="w-36 h-36 rounded-2xl object-cover mx-auto shadow-md border-4 border-white mb-4">
+                            <h3 class="text-xl font-bold text-slate-900">Karimov Abdulla Rustamovich</h3>
+                            <p class="text-sm font-medium text-blue-800 mt-1">Ma'naviy-ma'rifiy ishlar bo'yicha direktor o'rinbosari</p>
+                            <div class="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold">
+                                <i class="fa-solid fa-award"></i> Oliy toifali pedagog
+                            </div>
+                        </div>
+
+                        <!-- O'rta va O'ng ustun: Batafsil tafsilotlar -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <p class="text-slate-600 leading-relaxed text-base">
+                                Mening asosiy maqsadim — o'quvchi-yoshlarni milliy va umuminsoniy qadriyatlar ruhida tarbiyalash, ularda kitobxonlik madaniyatini oshirish hamda mustaqil fikrlaydigan, vatanparvar avlodni voyaga yetkazishdan iborat.
+                            </p>
+
+                            <!-- Ma'lumotlar jadvali -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                    <span class="text-xs font-semibold text-slate-400 uppercase">Ma'lumoti</span>
+                                    <p class="text-sm font-bold text-slate-800 mt-1">Oliy — Nizomiy nomidagi TDPU (Tarix va ma'naviyat asoslari)</p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                    <span class="text-xs font-semibold text-slate-400 uppercase">Pedagogik staji</span>
+                                    <p class="text-sm font-bold text-slate-800 mt-1">14 yil (shundan 6 yil rahbarlik lavozimida)</p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                    <span class="text-xs font-semibold text-slate-400 uppercase">Ish joyi</span>
+                                    <p class="text-sm font-bold text-slate-800 mt-1">24-sonli umumiy o'rta ta'lim maktabi</p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                    <span class="text-xs font-semibold text-slate-400 uppercase">Qabul kunlari</span>
+                                    <p class="text-sm font-bold text-slate-800 mt-1">Dushanba – Juma (14:00 dan 17:00 gacha)</p>
+                                </div>
+                            </div>
+
+                            <!-- Yutuqlar va Bog'lanish -->
+                            <div class="pt-2 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                <div class="flex flex-wrap gap-3 text-sm text-slate-600">
+                                    <span class="inline-flex items-center gap-2 bg-blue-50 text-blue-900 px-3.5 py-2 rounded-xl font-medium">
+                                        <i class="fa-solid fa-phone text-blue-700"></i> +998 (90) 123-45-67
+                                    </span>
+                                    <span class="inline-flex items-center gap-2 bg-blue-50 text-blue-900 px-3.5 py-2 rounded-xl font-medium">
+                                        <i class="fa-solid fa-envelope text-blue-700"></i> a.karimov@maktab.uz
+                                    </span>
+                                </div>
+                                <button onclick="closeAboutPanel()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold transition-colors self-start sm:self-auto">
+                                    Yopish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== INTERAKTIV DIV 2: "KUN MAQOLASI" BLOKI ==================== -->
+    <!-- "Kun maqolasi" bosilganda tarbiya haqidagi maqolalar chiqadigan maxsus div -->
+    <div id="articleDivContainer" class="hidden transition-all duration-300 ease-in-out bg-amber-50/60 border-b border-amber-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white rounded-3xl shadow-xl border border-amber-200/80 overflow-hidden relative">
+                <!-- Yuqori dekorativ lenta -->
+                <div class="bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 px-6 sm:px-10 py-5 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-400">
+                            <i class="fa-solid fa-book-open text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block">Tarbiya va Ma'naviyat Rukni</span>
+                            <h2 class="text-lg sm:text-xl font-bold text-white">Kun Maqolasi</h2>
+                        </div>
+                    </div>
+                    <button onclick="closeArticlePanel()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors" title="Yopish">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Maqola matni joylashadigan qism -->
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <span id="articleCategory" class="px-3.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-900">
+                            Odob va Axloq
+                        </span>
+                        <span id="articleCounter" class="text-xs font-semibold text-slate-400">
+                            Maqola 1 / 6
+                        </span>
+                    </div>
+
+                    <h3 id="articleTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4 leading-snug">
+                        Tarbiya — kelajak poydevori
+                    </h3>
+
+                    <div id="articleBody" class="space-y-4 text-slate-700 leading-relaxed text-base sm:text-lg border-l-4 border-amber-500 pl-5 py-1 bg-slate-50/70 rounded-r-2xl">
+                        <!-- JavaScript orqali to'ldiriladi -->
+                    </div>
+
+                    <!-- Hikmatli iqtibos qutisi -->
+                    <div class="mt-6 p-4 sm:p-5 rounded-2xl bg-blue-50/80 border border-blue-100 flex items-start gap-3.5">
+                        <i class="fa-solid fa-quote-left text-2xl text-blue-800/40 mt-1"></i>
+                        <div>
+                            <p id="articleQuote" class="italic font-medium text-blue-950 text-sm sm:text-base">
+                                "Tarbiya bizlar uchun yo hayot — yo mamot, yo najot — yo halokat, yo saodat — yo falokat masalasidir."
+                            </p>
+                            <span id="articleAuthor" class="block text-xs font-bold text-blue-800 mt-1.5">— Abdulla Avloniy</span>
+                        </div>
+                    </div>
+
+                    <!-- Boshqaruv tugmalari -->
+                    <div class="mt-8 pt-5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <button onclick="prevArticle()" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-700 text-sm font-semibold transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-arrow-left"></i> Oldingi
+                            </button>
+                            <button onclick="nextArticle()" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-sm font-bold transition-all shadow-sm hover:shadow flex items-center gap-2">
+                                <span>Keyingi maqola</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <button onclick="copyArticleText()" id="copyBtn" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold transition-colors flex items-center gap-2">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Nusxa olish</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HERO (ASOSIY KIRISH QISMI) ==================== -->
+    <header id="bosh-sahifa" class="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-slate-100 pt-12 pb-20 lg:pt-20 lg:pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Matnli qism -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/10 text-blue-900 text-xs sm:text-sm font-bold">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        Ma'naviy-ma'rifiy ishlar bo'yicha direktor o'rinbosari
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+                        Yuksak ma'naviyat va <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-indigo-700">barkamol tarbiya</span> — kelajak poydevori
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Assalomu alaykum! Ushbu rasmiy sahifada maktabimizdagi ma'naviy-ma'rifiy tadbirlar, yoshlar tarbiyasiga oid foydali maqolalar hamda pedagogik faoliyatim bilan yaqindan tanishishingiz mumkin.
+                    </p>
+
+                    <!-- Tezkor harakat tugmalari -->
+                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <button onclick="toggleAboutPanel()" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-blue-900 hover:bg-blue-800 text-white font-bold text-base shadow-lg shadow-blue-900/20 hover:shadow-xl transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-user-tie text-amber-400"></i>
+                            <span>Men haqimda</span>
+                        </button>
+
+                        <button onclick="openArticlePanel()" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-amber-50 text-slate-900 border-2 border-amber-400 font-bold text-base shadow-sm transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-book-open text-amber-600"></i>
+                            <span>Kun maqolasini o'qish</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rasm / Portret kartasi -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <!-- Orqa fon dekoratsiyasi -->
+                        <div class="absolute -inset-3 bg-gradient-to-tr from-blue-900 to-amber-400 rounded-3xl opacity-15 blur-lg"></div>
+                        
+                        <div class="relative bg-white p-5 rounded-3xl shadow-xl border border-slate-200/80">
+                            <div class="relative rounded-2xl overflow-hidden bg-slate-100 aspect-[4/4]">
+                                <img src="https://placehold.co/600x600/0f172a/ffffff?text=Karimov+Abdulla%0AZamdirektor" 
+                                     onerror="this.src='https://placehold.co/600x600/1e3a8a/fbbf24?text=Ma%27naviyat+Ustozi'"
+                                     alt="Zamdirektor portreti" 
+                                     class="w-full h-full object-cover">
+                                
+                                <!-- Pastki ma'lumot lentasi -->
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 via-slate-900/60 to-transparent p-6 text-white">
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-amber-400">24-sonli umumta'lim maktabi</p>
+                                    <h2 class="text-xl font-bold mt-0.5">Karimov Abdulla Rustamovich</h2>
+                                </div>
+                            </div>
+
+                            <!-- Qisqa shior -->
+                            <div class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                </div>
+                                <p class="text-xs sm:text-sm font-medium text-slate-700">
+                                    "Har bir bola — bir olam. Uning qalbiga ezgulik urug'ini qadash sharafli burchimizdir."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== STATISTIKA KO'RSATKICHLARI ==================== -->
+    <section class="py-10 bg-blue-950 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-amber-400">14+</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1 font-medium">Yillik pedagogik tajriba</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-amber-400">120+</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1 font-medium">Ma'naviy-ma'rifiy tadbirlar</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-amber-400">15+</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1 font-medium">Ijtimoiy-tarbiyaviy loyihalar</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-amber-400">100%</div>
+                    <div class="text-xs sm:text-sm text-slate-300 mt-1 font-medium">Ota-onalar bilan hamkorlik</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAOLIYAT YO'NALISHLARI ==================== -->
+    <section id="faoliyat" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-800 bg-blue-100 px-3.5 py-1.5 rounded-full">Asosiy Vazifalar</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Ma'naviy-Ma'rifiy Faoliyat Yo'nalishlari</h2>
+                <p class="text-slate-600 mt-3 text-base">
+                    Maktab jamoasi, o'quvchilar va ota-onalar bilan hamkorlikda olib boriladigan ustuvor tarbiyaviy yo'nalishlar.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Karta 1 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-200/80 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-900 group-hover:bg-blue-900 group-hover:text-amber-400 flex items-center justify-center text-2xl transition-colors mb-6">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Kitobxonlik Madaniyati</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        "Yosh kitobxon" tanlovlari, badiiy asarlar muhokamasi va kutubxona bilan hamkorlik orqali o'quvchilarda mutolaa madaniyatini shakllantirish.
+                    </p>
+                </div>
+
+                <!-- Karta 2 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-200/80 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-slate-950 flex items-center justify-center text-2xl transition-colors mb-6">
+                        <i class="fa-solid fa-people-roof"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Oila, Mahalla va Maktab</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        O'quvchilarning davomati, odob-axloqi va bo'sh vaqtini mazmunli tashkil etishda ota-onalar va mahalla faollari bilan uzviy ishlash.
+                    </p>
+                </div>
+
+                <!-- Karta 3 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-200/80 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-800 group-hover:bg-indigo-800 group-hover:text-white flex items-center justify-center text-2xl transition-colors mb-6">
+                        <i class="fa-solid fa-flag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Vatanparvarlik va Qadriyatlar</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Buyuk ajdodlarimiz merosini o'rganish, davlat ramzlariga hurmat va yoshlarda milliy g'urur tuyg'usini mustahkamlash tadbirlari.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER (QUYI QISM) ==================== -->
+    <footer class="bg-slate-900 text-slate-300 pt-14 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-slate-800">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-900 flex items-center justify-center text-amber-400">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Ma'naviyat<span class="text-amber-400">Maskani</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Ta'lim va tarbiya uyg'unligi — barkamol shaxs kamolotining eng muhim omilidir.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4">Tezkor Havolalar</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#bosh-sahifa" class="hover:text-amber-400 transition-colors">Bosh sahifa</a></li>
+                        <li><button onclick="toggleAboutPanel()" class="hover:text-amber-400 transition-colors">Men haqimda (Ma'lumotnoma)</button></li>
+                        <li><button onclick="openArticlePanel()" class="hover:text-amber-400 transition-colors">Kun maqolasi (Tarbiya)</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4">Bog'lanish</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-location-dot text-amber-400"></i> Toshkent sh., Mustaqillik ko'chasi, 24-maktab</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-phone text-amber-400"></i> +998 (90) 123-45-67</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-envelope text-amber-400"></i> a.karimov@maktab.uz</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 Ma'naviyat Maskani. Barcha huquqlar himoyalangan.</p>
+                <p>Pedagogik va ma'rifiy portfoliyo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Xabarnoma (Toast message) -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 text-sm font-medium transition-all">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastText">Matn nusxalandi!</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT MANTIQI ==================== -->
+    <script>
+        // Tarbiya haqidagi "Kun maqolasi" ma'lumotlar bazasi
+        const tarbiyaArticles = [
+            {
+                category: "Odob va Axloq",
+                title: "Odob — inson ziynati, tarbiya — kelajak poydevori",
+                paragraphs: [
+                    "Insonning qadr-qimmati uning mol-dunyosi yoki mansabi bilan emas, balki odobi, ma'naviyati va atrofdagilarga bo'lgan hurmati bilan o'lchanadi. Yoshlikda olingan go'zal tarbiya toshga o'yilgan naqsh kabidir — u umr bo'yi insonni yomonliklardan asraydi.",
+                    "Ota-ona va ustozlarning eng birinchi vazifasi farzand qalbida rostgo'ylik, kattalarga hurmat va kichiklarga izzat tuyg'ularini uyg'otishdir. Zero, axloqi go'zal avlodgina buyuk kelajakni qura oladi."
+                ],
+                quote: "Tarbiya bizlar uchun yo hayot — yo mamot, yo najot — yo halokat, yo saodat — yo falokat masalasidir.",
+                author: "Abdulla Avloniy"
+            },
+            {
+                category: "Kitobxonlik va Ilm",
+                title: "Kitob o'qigan bola yomon yo'lga kirmaydi",
+                paragraphs: [
+                    "Bugungi axborot asrida yoshlarni turli zararli g'oyalardan himoya qilishning eng samarali usuli — ularni kitobga oshno qilishdir. Kitob inson tafakkurini kengaytiradi, qalbini yumshatadi va oq-qorani ajratishni o'rgatadi.",
+                    "Har bir oilada kuniga kamida yarim soat birgalikda kitob mutolaa qilish an'anasi yo'lga qo'yilsa, farzandlarimizning nutqi ravon, dunyoqarashi esa teran bo'ladi."
+                ],
+                quote: "Kitob — barcha bunyodkorlik, yaratuvchilik va aql-idrokning, ilmu donishning asosidir.",
+                author: "Amir Temur hikmatlaridan"
+            },
+            {
+                category: "Ota-ona va Farzand",
+                title: "Tarbiyada shaxsiy namuna eng kuchli vositadir",
+                paragraphs: [
+                    "Bolalar kattalarning aytgan so'zidan ko'ra, qilgan ishiga qarab ulg'ayadilar. Agar biz farzandimizdan rostgo'ylikni, mehnatsevarlikni va tartib-intizomni talab qilsak, avvalo o'zimiz bu fazilatlarga amal qilishimiz shart.",
+                    "Shirin so'z, mehr-muhabbat va o'rinli rag'bat bola qalbida o'ziga bo'lgan ishonchni oshiradi. Qattiqqo'llik emas, tushuntirish va to'g'ri yo'l ko'rsatish haqiqiy tarbiyaning kalitidir."
+                ],
+                quote: "Farzandlaringizni o'z zamonangiz uchun emas, balki ular yashaydigan kelajak zamon uchun tarbiyalang.",
+                author: "Sharq hikmati"
+            },
+            {
+                category: "Vatanparvarlik",
+                title: "Vatanni sevmoq — iymondandir",
+                paragraphs: [
+                    "Vatanparvarlik balandparvoz shiorlar bilan emas, balki o'z maktabini ozoda saqlash, yaxshi o'qish, ustozlarni qadrlash va halol mehnat qilish bilan namoyon bo'ladi.",
+                    "O'z tarixini, buyuk allomalari va milliy qadriyatlarini bilgan o'quvchi hech qachon o'zligini yo'qotmaydi va yurt ravnaqi uchun munosib hissa qo'shadi."
+                ],
+                quote: "Vatan ostonadan boshlanadi; uni asrash va obod etish har birimizning muqaddas burchimizdir.",
+                author: "Xalq maqoli"
+            },
+            {
+                category: "Mehnatsevarlik",
+                title: "Mehnat bilan topilgan non shirin bo'ladi",
+                paragraphs: [
+                    "Yosh avlodni bolalikdan mehnatga, kasb-hunarga o'rgatish ularning hayotda o'z o'rnini topishida hal qiluvchi rol o'ynaydi. Bekorchilik — barcha illatlarning onasidir.",
+                    "O'quvchi maktab davridanoq vaqtning qadriga yetishni, o'z oldiga aniq maqsad qo'yishni va sabr-toqat bilan harakat qilishni o'rganishi lozim."
+                ],
+                quote: "Hunar — o'tda yonmas, suvda cho'kmas xazinadir.",
+                author: "Alisher Navoiy"
+            },
+            {
+                category: "Ustozga Hurmat",
+                title: "Ustoz — qalb me'mori",
+                paragraphs: [
+                    "Ustoz nafaqat fan sirlarini o'rgatuvchi mutaxassis, balki o'quvchining ma'naviy dunyosini shakllantiruvchi murabbiydir. O'qituvchiga hurmat ko'rsatgan jamiyat hamisha taraqqiy etgan.",
+                    "O'quvchilar qalbida ustozga nisbatan ehtirom uyg'otish orqali biz ilmga va ma'rifatga bo'lgan hurmatni yuksaltiramiz."
+                ],
+                quote: "Haq yo'linda kim senga bir harf o'qitmish ranj ila, Aylamak bo'lmas ado oning haqin yuz ganj ila.",
+                author: "Alisher Navoiy"
+            }
+        ];
+
+        let currentArticleIndex = 0;
+
+        // Sahifa yuklanganda birinchi maqolani tayyorlash
+        window.onload = function () {
+            renderArticle(currentArticleIndex);
+        };
+
+        // Mobil menyuni ochish/yopish
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('mobileMenuIcon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        }
+
+        // "Men haqimda" divini ochish/yopish
+        function toggleAboutPanel() {
+            const aboutDiv = document.getElementById('aboutDivContainer');
+            const articleDiv = document.getElementById('articleDivContainer');
+            
+            // Agar Kun maqolasi ochiq bo'lsa, uni yopamiz
+            if (!articleDiv.classList.contains('hidden')) {
+                articleDiv.classList.add('hidden');
+            }
+
+            aboutDiv.classList.toggle('hidden');
+            
+            if (!aboutDiv.classList.contains('hidden')) {
+                aboutDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function closeAboutPanel() {
+            document.getElementById('aboutDivContainer').classList.add('hidden');
+        }
+
+        // "Kun maqolasi" divini ochish
+        function openArticlePanel() {
+            const articleDiv = document.getElementById('articleDivContainer');
+            const aboutDiv = document.getElementById('aboutDivContainer');
+
+            // Agar Men haqimda ochiq bo'lsa, uni yopamiz
+            if (!aboutDiv.classList.contains('hidden')) {
+                aboutDiv.classList.add('hidden');
+            }
+
+            renderArticle(currentArticleIndex);
+            articleDiv.classList.remove('hidden');
+            articleDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function closeArticlePanel() {
+            document.getElementById('articleDivContainer').classList.add('hidden');
+        }
+
+        // Maqolani ekranga chiqarish
+        function renderArticle(index) {
+            const article = tarbiyaArticles[index];
+            document.getElementById('articleCategory').textContent = article.category;
+            document.getElementById('articleCounter').textContent = `Maqola ${index + 1} / ${tarbiyaArticles.length}`;
+            document.getElementById('articleTitle').textContent = article.title;
+            document.getElementById('articleQuote').textContent = `"${article.quote}"`;
+            document.getElementById('articleAuthor').textContent = `— ${article.author}`;
+
+            const bodyContainer = document.getElementById('articleBody');
+            bodyContainer.innerHTML = '';
+            article.paragraphs.forEach(pText => {
+                const p = document.createElement('p');
+                p.textContent = pText;
+                bodyContainer.appendChild(p);
+            });
+        }
+
+        // Keyingi maqolaga o'tish
+        function nextArticle() {
+            currentArticleIndex = (currentArticleIndex + 1) % tarbiyaArticles.length;
+            renderArticle(currentArticleIndex);
+        }
+
+        // Oldingi maqolaga qaytish
+        function prevArticle() {
+            currentArticleIndex = (currentArticleIndex - 1 + tarbiyaArticles.length) % tarbiyaArticles.length;
+            renderArticle(currentArticleIndex);
+        }
+
+        // Maqolani buferga nusxalash (document.execCommand orqali)
+        function copyArticleText() {
+            const article = tarbiyaArticles[currentArticleIndex];
+            const fullText = `${article.title}\n\n${article.paragraphs.join('\n\n')}\n\n"${article.quote}" — ${article.author}`;
+
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = fullText;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            try {
+                document.execCommand('copy');
+                showToast("Kun maqolasi nusxalandi!");
+            } catch (err) {
+                showToast("Nusxalashda xatolik yuz berdi.");
+            }
+            document.body.removeChild(tempTextarea);
+        }
+
+        // Xabarnoma ko'rsatish
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastText').textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
